@@ -1,0 +1,65 @@
+bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "rules_pkg", version = "1.2.0")
+bazel_dep(name = "rules_rust", version = "0.68.1")
+bazel_dep(name = "rules_cc", version = "0.2.16")
+bazel_dep(name = "rules_python", version = "1.7.0")
+bazel_dep(name = "com_github_mvukov_rules_ros2")
+archive_override(
+    module_name = "com_github_mvukov_rules_ros2",
+    url = "https://github.com/mvukov/rules_ros2/archive/7131e46f29aad4c2903e015bd44a531783e01939.tar.gz",
+    strip_prefix = "rules_ros2-7131e46f29aad4c2903e015bd44a531783e01939",
+    sha256 = "8533a337603c402d97522026c374d594229f4a664ca408afb1f45648f066d7d9",
+)
+
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    is_default = True,
+# You must pin the Python version to the one used for rules_ros2_pip_deps_numpy_headers and current_py_cc_headers in rules_ros2.
+# Otherwise you will get errors at analysis time like:
+#     configurable attribute "actual" in @@rules_python~~pip~rules_ros2_pip_deps//numpy:_no_matching_repository doesn't match this configuration: No matching wheel for current configuration's Python version.
+#     The current build configuration's Python version doesn't match any of the Python wheels available for this distribution.
+    python_version = "3.10",
+)
+
+register_toolchains(
+    "@com_github_mvukov_rules_ros2//repositories/rust:bindgen_toolchain",
+    dev_dependency = True,
+)
+
+rules_ros2_non_module_deps = use_extension("@com_github_mvukov_rules_ros2//ros2:extensions.bzl", "non_module_deps")
+use_repo(
+    rules_ros2_non_module_deps,
+    "ros2_common_interfaces",
+    "ros2_launch",
+    "ros2_launch_ros",
+    "ros2_rcl_interfaces",
+    "ros2_rclcpp",
+    "ros2_rcpputils",
+    "ros2_rcutils",
+    "ros2_rust",
+    "ros2cli",
+    "ros2_rclpy",
+    "ros2_rosidl",
+    "ros2_rosidl_python",
+    "ros2_rosidl_runtime_py",
+    "ros2_pluginlib",
+    "ros2_robot_state_publisher",
+    "ros2_geometry2",
+    "ros2_rosbag2",
+)
+
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+crate.spec(package = "anyhow", version = "1", features = ["backtrace"])
+crate.from_specs()
+use_repo(crate, "crates")
+
+# pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+# 
+# pip.parse(
+#     hub_name = "hmnd_pip_deps",
+#     python_version = "3.10",
+#     requirements_lock = "//:requirements_lock.txt",
+# )
+# 
+# use_repo(pip, "hmnd_pip_deps")
