@@ -1,0 +1,27 @@
+package(default_visibility = ["//visibility:public"])
+
+load(
+    "@com_github_mvukov_rules_ros2//ros2:interfaces.bzl",
+    "cpp_ros2_interface_library",
+    "py_ros2_interface_library",
+    "ros2_interface_library",
+)
+
+ros2_interface_library(
+    name = "rdelfin_msgs",
+    srcs = ["CustomMessage.msg"],
+    deps = [
+        "@ros2_common_interfaces//:std_msgs",
+        "@ros2_rcl_interfaces//:builtin_interfaces",
+    ],
+)
+
+cpp_ros2_interface_library(
+    name = "cpp_rdelfin_msgs",
+    deps = [":rdelfin_msgs"],
+)
+
+py_ros2_interface_library(
+    name = "py_rdelfin_msgs",
+    deps = [":rdelfin_msgs"],
+)

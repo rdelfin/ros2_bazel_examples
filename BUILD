@@ -4,5 +4,6 @@ ros2_topic(
     name = "topic",
     deps = [
         "@ros2_common_interfaces//:py_std_msgs",
+        "//interface:py_rdelfin_msgs",
     ],
 )
