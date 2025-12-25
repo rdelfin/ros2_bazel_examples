@@ -1,6 +1,7 @@
 bazel_dep(name = "fmt", version = "12.1.0")
 bazel_dep(name = "platforms", version = "1.0.0")
 bazel_dep(name = "rules_pkg", version = "1.2.0")
+bazel_dep(name = "rules_img", version = "0.3.3")
 bazel_dep(name = "rules_rust", version = "0.68.1")
 bazel_dep(name = "rules_cc", version = "0.2.16")
 bazel_dep(name = "rules_python", version = "1.7.0")
@@ -54,6 +55,15 @@ crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
 crate.spec(package = "anyhow", version = "1", features = ["backtrace"])
 crate.from_specs()
 use_repo(crate, "crates")
+
+pull = use_repo_rule("@rules_img//img:pull.bzl", "pull")
+pull(
+    name = "ubuntu",
+    digest = "sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02",
+    registry = "index.docker.io",
+    repository = "library/ubuntu",
+    tag = "24.04",
+)
 
 # pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 # 

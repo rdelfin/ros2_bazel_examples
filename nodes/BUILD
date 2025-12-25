@@ -1,3 +1,5 @@
+package(default_visibility = ["//visibility:public"])
+
 load("@com_github_mvukov_rules_ros2//ros2:cc_defs.bzl", "ros2_cpp_binary")
 load("@rules_python//python:defs.bzl", "py_binary")
 
