@@ -23,6 +23,7 @@ python.toolchain(
 #     The current build configuration's Python version doesn't match any of the Python wheels available for this distribution.
     python_version = "3.10",
 )
+use_repo(python, "python_3_10_x86_64-unknown-linux-gnu")
 
 register_toolchains(
     "@com_github_mvukov_rules_ros2//repositories/rust:bindgen_toolchain",
