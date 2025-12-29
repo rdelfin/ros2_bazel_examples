@@ -65,3 +65,10 @@ pull(
     repository = "library/ubuntu",
     tag = "24.04",
 )
+pull(
+    name = "ros_base",
+    digest = "sha256:47cd401378e9888c0e1d512736236dc051f88bc5e892f4ed332725390b3acbbd",
+    registry = "ghcr.io",
+    repository = "rdelfin/ros_base",
+    tag = "latest",
+)

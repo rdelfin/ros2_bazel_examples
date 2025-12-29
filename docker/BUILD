@@ -81,7 +81,7 @@ layer_from_tar(
 
 image_manifest(
     name = "app_image",
-    base = "@ubuntu",
+    base = "@ros_base",
     layers = [
         ":python_runtime_layer",
         ":app_layer",
