@@ -1,6 +1,7 @@
 bazel_dep(name = "fmt", version = "12.1.0")
 bazel_dep(name = "platforms", version = "1.0.0")
 bazel_dep(name = "rules_cc", version = "0.2.16")
+bazel_dep(name = "rules_distroless", version = "0.6.1")
 bazel_dep(name = "rules_oci", version = "2.2.7")
 bazel_dep(name = "rules_pkg", version = "1.2.0")
 bazel_dep(name = "rules_python", version = "1.7.0")
@@ -74,3 +75,15 @@ oci.pull(
 )
 use_repo(oci, "ubuntu")
 use_repo(oci, "ros_base")
+
+apt = use_extension(
+    "@rules_distroless//apt:extensions.bzl",
+    "apt",
+    dev_dependency = True,
+)
+apt.install(
+    name = "noble",
+    lock = "//distroless:noble.lock.json",
+    manifest = "//distroless:noble.yaml",
+)
+use_repo(apt, "noble")

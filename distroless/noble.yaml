@@ -1,0 +1,30 @@
+# Based off of rules_distroless example: https://github.com/bazel-contrib/rules_distroless/blob/main/examples/ubuntu_snapshot/noble.yaml
+# As noted, you can update the lockfile with
+#
+#     bazel run @noble//:lock
+version: 1
+
+sources:
+  - channel: noble main
+    url: https://snapshot.ubuntu.com/ubuntu/20240301T030400Z
+  - channel: noble-security main
+    url: https://snapshot.ubuntu.com/ubuntu/20240301T030400Z
+  - channel: noble-updates main
+    url: https://snapshot.ubuntu.com/ubuntu/20240301T030400Z
+
+archs:
+  - "amd64"
+  - "arm64"
+
+packages:
+  - "ncurses-base"
+  - "libncurses6"
+  - "tzdata"
+  - "bash"
+  - "coreutils" # for commands like `ls`
+  - "grep"
+  - libatomic1
+  # for apt list --installed
+  - "dpkg"
+  - "apt"
+  - "perl"
