@@ -1,6 +1,4 @@
-load("@rules_img//img:layer.bzl", "image_layer", "layer_from_tar")
-load("@rules_img//img:image.bzl", "image_manifest")
-load("@rules_img//img:load.bzl", "image_load")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 load("@rules_pkg//pkg:mappings.bzl", "pkg_files", "strip_prefix", "pkg_attributes")
 
@@ -59,11 +57,6 @@ pkg_tar(
     },
 )
 
-layer_from_tar(
-    name = "python_runtime_layer",
-    src = ":python_runtime_tar",
-)
-
 pkg_tar(
     name = "nodes_runfiles_tar",
     srcs = [
@@ -74,22 +67,17 @@ pkg_tar(
     include_runfiles = True,
 )
 
-layer_from_tar(
-    name = "app_layer",
-    src = ":nodes_runfiles_tar",
-)
-
-image_manifest(
+oci_image(
     name = "app_image",
     base = "@ros_base",
-    layers = [
-        ":python_runtime_layer",
-        ":app_layer",
+    tars = [
+        ":python_runtime_tar",
+        ":nodes_runfiles_tar",
     ],
 )
 
-image_load(
+oci_load(
     name = "load_app",
     image = ":app_image",
-    tag = "app:latest",
+    repo_tags = ["app:latest"],
 )
