@@ -1,10 +1,10 @@
 bazel_dep(name = "fmt", version = "12.1.0")
 bazel_dep(name = "platforms", version = "1.0.0")
-bazel_dep(name = "rules_pkg", version = "1.2.0")
-bazel_dep(name = "rules_rust", version = "0.68.1")
 bazel_dep(name = "rules_cc", version = "0.2.16")
-bazel_dep(name = "rules_python", version = "1.7.0")
 bazel_dep(name = "rules_oci", version = "2.2.7")
+bazel_dep(name = "rules_pkg", version = "1.2.0")
+bazel_dep(name = "rules_python", version = "1.7.0")
+bazel_dep(name = "rules_rust", version = "0.68.1")
 bazel_dep(name = "com_github_mvukov_rules_ros2")
 archive_override(
     module_name = "com_github_mvukov_rules_ros2",
