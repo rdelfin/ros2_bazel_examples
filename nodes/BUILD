@@ -1,7 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 
 load("@com_github_mvukov_rules_ros2//ros2:cc_defs.bzl", "ros2_cpp_binary")
+load("@com_github_mvukov_rules_ros2//ros2:launch.bzl", "ros2_launch")
 load("@rules_python//python:defs.bzl", "py_binary")
+load("@com_github_mvukov_rules_ros2//third_party:expand_template.bzl", "expand_template")
 
 ros2_cpp_binary(
     name = "talker",
@@ -19,5 +21,14 @@ py_binary(
     deps = [
         "@ros2_rclpy//:rclpy",
         "//interface:py_rdelfin_msgs",
+    ],
+)
+
+ros2_launch(
+    name = "launch_nodes",
+    launch_file = "nodes.launch.py",
+    nodes = [
+        ":talker",
+        ":listener",
     ],
 )
