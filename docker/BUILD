@@ -64,6 +64,7 @@ pkg_tar(
     srcs = [
         "//nodes:talker",
         "//nodes:listener",
+        "//nodes:launch_nodes",
     ],
     package_dir = "/usr/lib/ros_src",
     include_runfiles = True,
@@ -72,6 +73,8 @@ pkg_tar(
 oci_image(
     name = "app_image",
     base = "@ros_base",
+    workdir = "/usr/lib/ros_src/launch_nodes.runfiles/_main",
+    cmd = "command.txt",
     tars = [
         ":python_runtime_tar",
         ":nodes_runfiles_tar",

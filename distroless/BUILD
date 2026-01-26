@@ -52,6 +52,8 @@ oci_image(
         "@platforms//cpu:x86_64": "amd64",
     }),
     os = "linux",
+    workdir = "/usr/lib/ros_src/launch_nodes.runfiles/_main",
+    cmd = "command.txt",
     tars = [
         ":sh",
         ":passwd",
