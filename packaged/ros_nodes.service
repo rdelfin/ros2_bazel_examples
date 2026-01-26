@@ -1,0 +1,10 @@
+[Unit]
+Description=ROS Nodes
+
+[Service]
+ExecStart=/usr/bin/launch_nodes
+WorkingDirectory=/usr/lib/ros_src/launch_nodes.runfiles/_main
+Environment=HOME=/root
+
+[Install]
+WantedBy=multi-user.target

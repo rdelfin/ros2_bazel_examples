@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+systemctl stop ros_nodes.service
+systemctl disable ros_nodes.service

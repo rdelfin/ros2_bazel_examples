@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+systemctl --system daemon-reload
+systemctl enable ros_nodes.service
+systemctl start ros_nodes.service
