@@ -24,6 +24,7 @@ packages:
   - "coreutils" # for commands like `ls`
   - "grep"
   - libatomic1
+  - tune2fs
   # for apt list --installed
   - "dpkg"
   - "apt"

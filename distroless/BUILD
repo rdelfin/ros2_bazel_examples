@@ -43,7 +43,7 @@ pkg_tar(
     name = "sh",
     symlinks = {
         # needed as dpkg assumes sh is installed in a typical debian installation.
-        "/bin/sh": "/bin/bash",
+        "/usr/bin/sh": "/usr/bin/bash",
     },
 )
 
